@@ -1,15 +1,11 @@
-<script> /*Navigation pages script*/
-
 function doSomething(contentId) {
-    /*Hides page when other button is pressed as to not overlap content*/
-    const allContent = document.querySelectorAll('hiddenContent');
+    // Hides all other content sections
+    const allContent = document.querySelectorAll('.hiddenContent');
     allContent.forEach(content => {
         content.style.display = 'none';
     });
 
-     /*Shows the Page when button is pressed in navbar*/
+    // Shows the selected section
     const selectedContent = document.getElementById(contentId);
     selectedContent.style.display = 'block';
 }
-
-</script>
