@@ -6,10 +6,10 @@ center {
     font-family: monospace;
 }
 
-.hiddenContent {
+.hiddenContent {    /* This class is used to hide the content of the div element */
     display: none;
 }
 
-button {
-    background-color: #b5c74f;
+button {   
+    background-color: #b5c74f; 
 }
