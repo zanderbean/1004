@@ -1,0 +1,1 @@
+storing passwords securely is essential in today’s digital world due to the increasing risk of data breaches. Many people reuse weak passwords, so this app educates users while helping them manage their accounts.
