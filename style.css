@@ -1,22 +1,18 @@
 body {
     background-color: #cdd2ffda;
 }
-
 center {
     font-family: monospace;
 }
-
 .hiddenContent {    /* This class is used to hide the content of the div element */
     display: none;
 }
-
 button {   
     background-color: #ebfc8a; 
 }
 button:hover {
     transform: scale(1.04);
 }
-
 .app-list {
     display: flex;
     flex-direction: column;
@@ -24,24 +20,24 @@ button:hover {
     gap: 12px;
     margin-top: 20px;
 }
-
 .app-card {
-    background-color: #625ad3;
     border-radius: 10px;
     padding: 12px 20px;
-
 }
-
 .app-card:hover {
     transform: scale(1.02);
 }
-
+.Weak, .Medium, .Strong {
+    display: inline-block;
+    padding: 8px 12px;
+    font-weight: bold;
+}
 .weak {
-    background-color: #ff4d4d; 
+    background-color: #d64040; 
 }
 .medium {
-    background-color: #ffcc00; 
+    background-color: #ebce5d; 
 }
 .strong {
-    background-color: #66cc66; 
+    background-color: #6de26d; 
 }

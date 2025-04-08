@@ -50,6 +50,17 @@ function savePassword() {
     
 }
 
+// Logic for evaluating password strenght, credits to  jagathishwaran on github
+
+function evaluateStrength(password) {
+    let strength = 0;
+    if (password.length >= 8) strength++;
+    if (/[A-Z]/.test(password)) strength++;
+    if (/[a-z]/.test(password)) strength++;
+    if (/[0-9]/.test(password)) strength++;
+    if (/[^A-Za-z0-9]/.test(password)) strength++;
+    return strength;
+}
 
 // logic for showing list of saved applications
 function displaySavedApplications() {
@@ -79,14 +90,31 @@ function displaySavedApplications() {
     });
 }
 
-// Logic for evaluating password strenght, credits to  jagathishwaran on github
 
-function evaluateStrength(password) {
-    let strength = 0;
-    if (password.length >= 8) strength++;
-    if (/[A-Z]/.test(password)) strength++;
-    if (/[a-z]/.test(password)) strength++;
-    if (/[0-9]/.test(password)) strength++;
-    if (/[^A-Za-z0-9]/.test(password)) strength++;
-    return strength;
+function searchApplication() {
+    const searchInput = document.getElementById('searchApp').value.trim().toLowerCase();
+    const searchResult = document.getElementById('searchResult');
+    searchResult.innerHTML = ''; // clears previous result
+
+    if (!searchInput) {
+        searchResult.textContent = 'Please enter an application name.';
+        return;
+    }
+
+    const passwordDatabase = JSON.parse(localStorage.getItem('passwords')) || [];
+
+    const match = passwordDatabase.find(entry => entry.application.toLowerCase() === searchInput);
+
+    if (match) {
+        const resultCard = document.createElement('div');
+        resultCard.className = 'app-card';
+        resultCard.innerHTML = `
+            <strong>Application:</strong> ${match.application} <br>
+            <strong>Username:</strong> ${match.username} <br>
+            <strong>Password:</strong> ${match.password}
+        `;
+        searchResult.appendChild(resultCard);
+    } else {
+        searchResult.textContent = 'No application found with that name.';
+    }
 }
