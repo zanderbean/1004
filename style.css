@@ -1,5 +1,5 @@
 body {
-    background-color: #6074e6;
+    background-color: #cdd2ffda;
 }
 
 center {
@@ -11,5 +11,27 @@ center {
 }
 
 button {   
-    background-color: #b5c74f; 
+    background-color: #ebfc8a; 
+}
+button:hover {
+    transform: scale(1.04);
+}
+
+.app-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.app-card {
+    background-color: #756cf7;
+    border-radius: 10px;
+    padding: 12px 20px;
+
+}
+
+.app-card:hover {
+    transform: scale(1.02);
 }

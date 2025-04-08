@@ -53,8 +53,9 @@ function displaySavedApplications() {
 
     // check if there are any saved applicaitons
     passwordDatabase.forEach((entry, index) => {
-        const li = document.createElement('li');
-        li.textContent = `${entry.application}`;
-        appList.appendChild(li);
+        const appCard = document.createElement('div');
+        appCard.className = 'app-Card';
+        appCard.textContent = `${entry.application}`;
+        appList.appendChild(appCard);
     });
 }
