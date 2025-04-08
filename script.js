@@ -1,3 +1,6 @@
+
+
+// page switching logic
 function doSomething(contentId) {
     // Hides all other content sections
     const allContent = document.querySelectorAll('.hiddenContent');
@@ -14,9 +17,8 @@ function doSomething(contentId) {
     }
 }
 
-
-// Create an array to store passwords
-const passwordDatabase = [];
+//  load from local storage or initialize empty array
+let passwordDatabase = JSON.parse(localStorage.getItem('passwords')) || [];
 
 function savePassword() {
     const app = document.getElementById('Application').value.trim();
@@ -38,6 +40,8 @@ function savePassword() {
     // Store password in the array 
     passwordDatabase.push(entry);
 
+    localStorage.setItem('passwords', JSON.stringify(passwordDatabase));
+
     // clear inputs after submission
     document.getElementById('Application').value = '';
     document.getElementById('Usernamein').value = '';
@@ -47,14 +51,18 @@ function savePassword() {
     
 }
 
+
+// logic for showing list of saved applications
 function displaySavedApplications() {
     const appList = document.getElementById('appList');
     appList.innerHTML = ''; // Clear current list
 
+    passwordDatabase = JSON.parse(localStorage.getItem('passwords')) || [];
+
     // check if there are any saved applicaitons
     passwordDatabase.forEach((entry, index) => {
         const appCard = document.createElement('div');
-        appCard.className = 'app-Card';
+        appCard.className = 'app-card';
         appCard.textContent = `${entry.application}`;
         appList.appendChild(appCard);
     });
