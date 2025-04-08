@@ -18,7 +18,7 @@ function doSomething(contentId) {
 }
 
 //  load from local storage or initialize empty array
-let passwordDatabase = JSON.parse(localStorage.getItem('passwords')) || [];
+let passwordDatabase = JSON.parse(localStorage.getItem('userdata')) || [];
 
 function savePassword() {
     const app = document.getElementById('Application').value.trim();
@@ -39,7 +39,7 @@ function savePassword() {
     // Store password in the array 
     passwordDatabase.push(entry);
 
-    localStorage.setItem('passwords', JSON.stringify(passwordDatabase));
+    localStorage.setItem('userdata', JSON.stringify(passwordDatabase));
 
     // clear inputs after submission
     document.getElementById('Application').value = '';
@@ -48,6 +48,14 @@ function savePassword() {
 
     alert('Password saved successfully!');
     
+}
+
+// Clear localStorage when button pressed on password manager page
+function clearAllPasswords() {
+    localStorage.removeItem('userdata'); 
+    passwordDatabase = []; 
+    displaySavedApplications(); // Update UI
+    document.getElementById('searchResult').innerHTML = ''; 
 }
 
 // Logic for evaluating password strenght, credits to  jagathishwaran on github
@@ -67,7 +75,7 @@ function displaySavedApplications() {
     const appList = document.getElementById('appList');
     appList.innerHTML = ''; // Clear current list
 
-    passwordDatabase = JSON.parse(localStorage.getItem('passwords')) || [];
+    passwordDatabase = JSON.parse(localStorage.getItem('userdata')) || [];
 
     // check if there are any saved applicaitons
     passwordDatabase.forEach((entry) => {
@@ -92,18 +100,14 @@ function displaySavedApplications() {
 
 
 function searchApplication() {
-    const searchInput = document.getElementById('searchApp').value.trim().toLowerCase();
+    const searchInput = document.getElementById('searchApp').value.trim();
     const searchResult = document.getElementById('searchResult');
     searchResult.innerHTML = ''; // clears previous result
 
-    if (!searchInput) {
-        searchResult.textContent = 'Please enter an application name.';
-        return;
-    }
 
-    const passwordDatabase = JSON.parse(localStorage.getItem('passwords')) || [];
+    const passwordDatabase = JSON.parse(localStorage.getItem('userdata')) || [];
 
-    const match = passwordDatabase.find(entry => entry.application.toLowerCase() === searchInput);
+    const match = passwordDatabase.find(entry => entry.application === searchInput);
 
     if (match) {
         const resultCard = document.createElement('div');
