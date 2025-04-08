@@ -122,3 +122,39 @@ function searchApplication() {
         searchResult.textContent = 'No application found with that name.';
     }
 }
+
+// Export the passwords to a flat file (.txt)
+function exportPasswords() {
+    var jsonData = JSON.stringify(passwordDatabase);
+    var fileBlob = new Blob([jsonData], { type: 'text/plain' });
+    var fileUrl = URL.createObjectURL(fileBlob);
+
+    var downloadLink = document.createElement('a');
+    downloadLink.href = fileUrl;
+    downloadLink.download = 'passwords.txt';
+    downloadLink.click();
+
+    URL.revokeObjectURL(fileUrl); // free memory
+}
+
+// Import passwords from a flat file
+function importPasswords(event) {
+    var selectedFile = event.target.files[0];
+    var fileReader = new FileReader();
+
+    fileReader.onload = function(e) {
+        try {
+            var loadedData = JSON.parse(e.target.result);
+            passwordDatabase = loadedData;
+            localStorage.setItem('userdata', JSON.stringify(passwordDatabase));
+            displaySavedApplications();
+            alert("Passwords imported!");
+        } catch (err) {
+            alert("Invalid file format.");
+        }
+    };
+
+    if (selectedFile) {
+        fileReader.readAsText(selectedFile);
+    }
+}
