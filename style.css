@@ -35,3 +35,13 @@ button:hover {
 .app-card:hover {
     transform: scale(1.02);
 }
+
+.weak {
+    background-color: #ff4d4d; 
+}
+.medium {
+    background-color: #ffcc00; 
+}
+.strong {
+    background-color: #66cc66; 
+}

@@ -29,12 +29,11 @@ function savePassword() {
         alert('Please fill out all fields.');
         return;
     }
-
-    //  object to hold the data
     const entry = {
         application: app,
         username: username,
         password: password
+        
     };
 
     // Store password in the array 
@@ -60,10 +59,34 @@ function displaySavedApplications() {
     passwordDatabase = JSON.parse(localStorage.getItem('passwords')) || [];
 
     // check if there are any saved applicaitons
-    passwordDatabase.forEach((entry, index) => {
+    passwordDatabase.forEach((entry) => {
         const appCard = document.createElement('div');
         appCard.className = 'app-card';
+
+        const strength = evaluateStrength(entry.password);
+
+        // Add corresponding strength class
+        if (strength <= 2) {
+            appCard.classList.add('weak');
+        } else if (strength <= 4) {
+            appCard.classList.add('medium');
+        } else {
+            appCard.classList.add('strong');
+        }
+
         appCard.textContent = `${entry.application}`;
         appList.appendChild(appCard);
     });
+}
+
+// Logic for evaluating password strenght, credits to  jagathishwaran on github
+
+function evaluateStrength(password) {
+    let strength = 0;
+    if (password.length >= 8) strength++;
+    if (/[A-Z]/.test(password)) strength++;
+    if (/[a-z]/.test(password)) strength++;
+    if (/[0-9]/.test(password)) strength++;
+    if (/[^A-Za-z0-9]/.test(password)) strength++;
+    return strength;
 }
